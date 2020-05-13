@@ -1,0 +1,34 @@
+service: pre-auth-generic
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage, 'dev'}
+  region: ap-southeast-2
+  endpointType: regional
+  role: arn:aws:iam::416527880812:role/lambda_basic_execution_with_read_only_access_to_SSM
+  environment:
+    ENV: ${self:provider.stage}
+    region: ${self:provider.region}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - ssm:GetParameter
+        - ssm:GetParameters
+      Resource:
+        - "arn:aws:ssm:${self:provider.region}:416527880812:parameter/${self:provider.stage}/needed-groups/*"
+    - Effect: Allow
+      Action:
+        - kms:Decrypt
+      Resource:
+        - "arn:aws:kms:ap-southeast-2:416527880812:key/3cf7aeb4-ad8c-4505-a8e3-7d2a556e188d"
+
+package:
+  exclude:
+    - .git/**
+    - node_modules/**
+    - tests/**
+
+functions:
+  auth:
+    handler: handler.auth

@@ -1,0 +1,31 @@
+{
+  "name": "pre-auth-trigger",
+  "version": "1.0.0",
+  "description": "AWS Cognito trigger Lambda function used to check if a user is in the correct groups. Checks parameter store then looks for app-specific Lambdas.",
+  "main": "handler.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "aws-sdk": "^2.675.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UoA-eResearch/pre-auth-trigger.git"
+  },
+  "keywords": [
+    "Lambda",
+    "Cognito",
+    "Serverless"
+  ],
+  "author": "Sam Kavanagh (tofu.dev)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UoA-eResearch/pre-auth-trigger/issues"
+  },
+  "homepage": "https://github.com/UoA-eResearch/pre-auth-trigger#readme"
+}

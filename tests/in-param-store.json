@@ -1,0 +1,15 @@
+{
+    "userPoolId": "uoa-pool",
+    "callerContext": {
+        "clientId": "5ascspst9skjakf8d41pglpkis"
+    },
+    "request": {
+        "userAttributes": {
+            "custom:Groups": [
+                "ManagedPrintUsers.its",
+                "Employee.psrwi",
+                "staffIntranetUser.ec"
+            ]
+        }
+    }
+}
