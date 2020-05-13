@@ -9,8 +9,7 @@ module.exports.auth = async (event, context, callback) => {
     let paramStoreNeededGroups;
 
     try { // Get groups from parameter store
-      // TODO: Change path
-      paramStoreNeededGroups = await SSM.getParameter({ Name: `/${process.env.ENV}/needed-groups/${appClientID}` }).promise()
+      paramStoreNeededGroups = await SSM.getParameter({ Name: `/${process.env.ENV}/cognito/${appClientID}` }).promise()
         .then(res => res.Parameter.Value);
 
       if (paramStoreNeededGroups === 'NO_AUTHORISATION_NEEDED') {
