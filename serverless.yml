@@ -28,6 +28,11 @@ package:
     - .git/**
     - node_modules/**
     - tests/**
+    - package**
+    - README.md
+  include:
+    - handler.js
+
 
 functions:
   auth:
