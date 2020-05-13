@@ -6,7 +6,7 @@ module.exports.auth = async function (event, context, callback) {
     const SSM = new AWS.SSM({ region: process.env.region });
     const appClientID = event.callerContext.clientId;
     let paramStoreNeededGroups;
-    console.log({ event: event, appClientID: appClientID });
+    console.log(event, appClientID);
 
     try { // Get groups from parameter store
       paramStoreNeededGroups = await SSM.getParameter({ Name: `/${process.env.ENV}/cognito/${appClientID}` }).promise()
