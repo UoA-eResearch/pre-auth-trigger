@@ -6,11 +6,13 @@ module.exports.auth = async (event, context, callback) => {
 
   try {
     const appClientID = event.callerContext.clientId;
-    let paramStoreNeededGroups;
+    console.log({ event: event, appClientID: appClientID });
 
+    let paramStoreNeededGroups;
     try { // Get groups from parameter store
       paramStoreNeededGroups = await SSM.getParameter({ Name: `/${process.env.ENV}/cognito/${appClientID}` }).promise()
         .then(res => res.Parameter.Value);
+      console.log({ paramStoreNeededGroups: paramStoreNeededGroups });
 
       if (paramStoreNeededGroups === 'NO_AUTHORISATION_NEEDED') {
         return authResultToCognito(true);

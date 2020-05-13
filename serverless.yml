@@ -6,7 +6,7 @@ provider:
   stage: ${opt:stage, 'dev'}
   region: ap-southeast-2
   endpointType: regional
-  role: arn:aws:iam::416527880812:role/lambda_basic_execution_with_read_only_access_to_SSM
+  role: arn:aws:iam::${AWS::AccountId}:role/lambda_basic_execution_with_read_only_access_to_SSM
   environment:
     ENV: ${self:provider.stage}
     region: ${self:provider.region}
@@ -16,12 +16,12 @@ provider:
         - ssm:GetParameter
         - ssm:GetParameters
       Resource:
-        - "arn:aws:ssm:${self:provider.region}:416527880812:parameter/${self:provider.stage}/needed-groups/*"
+        - "arn:aws:ssm:${self:provider.region}:${AWS::AccountId}:parameter/${self:provider.stage}/cognito/*"
     - Effect: Allow
       Action:
         - kms:Decrypt
       Resource:
-        - "arn:aws:kms:ap-southeast-2:416527880812:key/3cf7aeb4-ad8c-4505-a8e3-7d2a556e188d"
+        - "arn:aws:kms:ap-southeast-2:${AWS::AccountId}:key/3cf7aeb4-ad8c-4505-a8e3-7d2a556e188d"
 
 package:
   exclude:
@@ -32,7 +32,6 @@ package:
     - README.md
   include:
     - handler.js
-
 
 functions:
   auth:
